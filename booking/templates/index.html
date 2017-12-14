@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi, {{ user.username }}!</h1>
+    {% for bill in bills %}
+    <div><p>{{ bill.payer.username }} company: <b>{{ bill.company }}</b></p></div>
+    {% endfor %}
+{% endblock %}
