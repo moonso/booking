@@ -27,6 +27,8 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         flash('Login requested for user {0}, remember_me={1}'.format(
-            form.username.data, form,remember_me.data))
+            form.username.data, form.remember_me.data))
         return redirect('/index')
+    else:
+        flash("Please fill both username and password")
     return render_template('login.html', title='Sign In', form=form)
