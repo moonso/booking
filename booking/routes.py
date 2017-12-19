@@ -1,6 +1,7 @@
 from flask import (render_template, flash, redirect)
-from booking import app
+from booking import (app, mongo)
 from booking.forms import LoginForm
+from booking.models import User
 
 @app.route('/')
 @app.route('/index')
@@ -32,3 +33,11 @@ def login():
     else:
         flash("Please fill both username and password")
     return render_template('login.html', title='Sign In', form=form)
+
+@app.route('/add')
+def add():
+    """Add a user to the database"""
+    dummy_user = User('Clark Kent', email='clark@kent.com')
+    user = mongo.db.users
+    user.insert(dummy_user)
+    return "Added user {0} with email {1}".format(dummy_user['username'], dummy_user['email'])
